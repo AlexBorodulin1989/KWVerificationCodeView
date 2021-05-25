@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  KWVerificationCodeView: 92cca6ad028546d3232fa75cda3a40d00109a1a2
+  KWVerificationCodeView: e50aa6554683ab7df8fa01a72b22f69152572e58
 
 PODFILE CHECKSUM: a645833ad18a0280b37da5a68acc71d6b5d1415d
 

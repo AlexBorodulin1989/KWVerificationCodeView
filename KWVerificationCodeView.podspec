@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author           = { 'KeepWorks' => 'ios@keepworks.com' }
   s.source           = { :git => 'https://github.com/keepworks/kwverificationcodeview.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '12.1'
   s.source_files = 'KWVerificationCodeView/Classes/**/*'
   s.swift_version = '5.0'
 end
