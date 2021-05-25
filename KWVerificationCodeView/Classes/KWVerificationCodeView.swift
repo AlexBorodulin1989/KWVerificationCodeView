@@ -12,6 +12,7 @@ public protocol KWVerificationCodeViewDelegate: class {
   func didChangeVerificationCode()
 }
 
+@available(iOS 10.0, *)
 @IBDesignable open class KWVerificationCodeView: UIView {
 
   // MARK: - Constants
@@ -105,7 +106,7 @@ public protocol KWVerificationCodeViewDelegate: class {
       }
     }
   }
-  
+    
   public var textContentType: UITextContentType = UITextContentType.oneTimeCode {
     didSet {
       for textFieldView in textFieldViews {
@@ -212,7 +213,7 @@ public protocol KWVerificationCodeViewDelegate: class {
       currentX += (textFieldViewWidth + textFieldViewLeadingSpace)
     }
 
-    textFieldViews[0].numberTextField.text = " "
+    textFieldViews[0].numberTextField.text = ""
   }
 
   private func setupVerificationCodeView() {
@@ -225,6 +226,7 @@ public protocol KWVerificationCodeViewDelegate: class {
 }
 
 // MARK: - KWTextFieldDelegate
+@available(iOS 10.0, *)
 extension KWVerificationCodeView: KWTextFieldDelegate {
   func moveToNext(_ textFieldView: KWTextFieldView) {
     let validIndex = textFieldViews.firstIndex(of: textFieldView) == textFieldViews.count - 1 ? textFieldViews.firstIndex(of: textFieldView)! : textFieldViews.firstIndex(of: textFieldView)! + 1
@@ -232,15 +234,13 @@ extension KWVerificationCodeView: KWTextFieldDelegate {
   }
 
   func moveToPrevious(_ textFieldView: KWTextFieldView, oldCode: String) {
-    if textFieldViews.last == textFieldView && oldCode != " " {
+    if textFieldViews.first == textFieldView {
       return
     }
 
-    if textFieldView.code == " " {
-      let validIndex = textFieldViews.firstIndex(of: textFieldView)! == 0 ? 0 : textFieldViews.firstIndex(of: textFieldView)! - 1
-      textFieldViews[validIndex].activate()
-      textFieldViews[validIndex].reset()
-    }
+    let validIndex = textFieldViews.firstIndex(of: textFieldView)! == 0 ? 0 : textFieldViews.firstIndex(of: textFieldView)! - 1
+    textFieldViews[validIndex].activate()
+    textFieldViews[validIndex].reset()
   }
 
   func didChangeCharacters() {

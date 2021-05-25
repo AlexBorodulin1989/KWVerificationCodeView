@@ -102,7 +102,7 @@ protocol KWTextFieldDelegate: class {
   public func activate() {
     numberTextField.becomeFirstResponder()
     if numberTextField.text?.count == 0 {
-      numberTextField.text = " "
+      numberTextField.text = ""
     }
   }
 
@@ -111,7 +111,7 @@ protocol KWTextFieldDelegate: class {
   }
 
   public func reset() {
-    numberTextField.text = " "
+    //numberTextField.text = ""
     updateUnderline()
   }
 
@@ -119,7 +119,7 @@ protocol KWTextFieldDelegate: class {
   private func setup() {
     loadViewFromNib()
     numberTextField.delegate = self
-    numberTextField.autocorrectionType = UITextAutocorrectionType.no
+    //numberTextField.autocorrectionType = UITextAutocorrectionType.no
 
     NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(_:)), name: UITextField.textDidChangeNotification, object: numberTextField)
   }
@@ -130,7 +130,7 @@ protocol KWTextFieldDelegate: class {
 
   @objc private func textFieldDidChange(_ notification: Foundation.Notification) {
     if numberTextField.text?.count == 0 {
-      numberTextField.text = " "
+      numberTextField.text = ""
     }
   }
 }
@@ -141,17 +141,17 @@ extension KWTextFieldView: UITextFieldDelegate {
     let currentString = numberTextField.text!
     let newString = currentString.replacingCharacters(in: textField.text!.range(from: range)!, with: string)
 
-    if newString.count > type(of: self).maxCharactersLength {
+    if newString.count >= type(of: self).maxCharactersLength {
       delegate?.moveToNext(self)
       textField.text = string
-    } else if newString.count == 0 {
+    } else if string.count == 0 {
       delegate?.moveToPrevious(self, oldCode: textField.text!)
-      numberTextField.text = " "
+      numberTextField.text = ""
     }
 
     delegate?.didChangeCharacters()
     updateUnderline()
 
-    return newString.count <= type(of: self).maxCharactersLength
+    return false//newString.count <= type(of: self).maxCharactersLength
   }
 }
