@@ -234,13 +234,14 @@ extension KWVerificationCodeView: KWTextFieldDelegate {
   }
 
   func moveToPrevious(_ textFieldView: KWTextFieldView, oldCode: String) {
-    if textFieldViews.first == textFieldView {
+    if textFieldViews.first == textFieldView || oldCode.count > 0 {
       return
     }
 
     let validIndex = textFieldViews.firstIndex(of: textFieldView)! == 0 ? 0 : textFieldViews.firstIndex(of: textFieldView)! - 1
     textFieldViews[validIndex].activate()
     textFieldViews[validIndex].reset()
+    textFieldViews[validIndex].numberTextField.text = ""
   }
 
   func didChangeCharacters() {

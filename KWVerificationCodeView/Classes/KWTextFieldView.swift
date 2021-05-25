@@ -70,7 +70,7 @@ protocol KWTextFieldDelegate: class {
   }
 
   // MARK: - IBOutlets
-  @IBOutlet weak var numberTextField: UITextField!
+  @IBOutlet weak var numberTextField: KWTextField!
   @IBOutlet weak private var underlineView: UIView!
 
   // MARK: - Variables
@@ -119,7 +119,10 @@ protocol KWTextFieldDelegate: class {
   private func setup() {
     loadViewFromNib()
     numberTextField.delegate = self
-    //numberTextField.autocorrectionType = UITextAutocorrectionType.no
+    
+    numberTextField.backspaceCalled = {[weak self]  textField in
+        self?.delegate?.moveToPrevious(self!, oldCode: textField.text!)
+    }
 
     NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(_:)), name: UITextField.textDidChangeNotification, object: numberTextField)
   }
