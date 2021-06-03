@@ -114,6 +114,14 @@ public protocol KWVerificationCodeViewDelegate: class {
       }
     }
   }
+    
+    public var inputAccessView: UIView? = nil {
+        didSet {
+            for textFieldView in textFieldViews {
+                textFieldView.numberTextField.inputAccessoryView = inputAccessView
+            }
+        }
+    }
 
   // MARK: - IBOutlets
   @IBOutlet var view: UIView!
