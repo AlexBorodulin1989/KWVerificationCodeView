@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KWTextFieldView" customModule="KWVerificationCodeView" customModuleProvider="target">
             <connections>
                 <outlet property="numberTextField" destination="uky-3e-m7A" id="Ogl-UJ-h2a"/>
+                <outlet property="underlineHeight" destination="pFW-zo-tEa" id="EJv-ca-FWJ"/>
                 <outlet property="underlineView" destination="eC6-EU-k8d" id="qc7-Kb-F7X"/>
             </connections>
         </placeholder>

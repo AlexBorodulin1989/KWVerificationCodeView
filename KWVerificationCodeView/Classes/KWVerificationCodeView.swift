@@ -18,7 +18,7 @@ public protocol KWVerificationCodeViewDelegate: class {
   // MARK: - Constants
   private let minDigits: UInt8 = 2
   private let maxDigits: UInt8 = 8
-  private let textFieldViewLeadingSpace: CGFloat = 10
+  private var textFieldViewLeadingSpace: CGFloat = 10
   private let textFieldViewVerticalSpace: CGFloat = 6
 
   // MARK: - IBInspectables
@@ -45,6 +45,13 @@ public protocol KWVerificationCodeViewDelegate: class {
       }
     }
   }
+    
+    @IBInspectable public var textFieldsIndent: CGFloat = 10 {
+      didSet {
+        textFieldViewLeadingSpace = textFieldsIndent
+        setupTextFieldViews()
+      }
+    }
 
   @IBInspectable public var digits: UInt8 = 4 {
     didSet {
@@ -98,6 +105,14 @@ public protocol KWVerificationCodeViewDelegate: class {
       }
     }
   }
+    
+    @IBInspectable public var underlineHeight: CGFloat = 1 {
+      didSet {
+        for textFieldView in textFieldViews {
+            textFieldView.underlineHeight.constant = underlineHeight
+        }
+      }
+    }
 
   public var keyboardType: UIKeyboardType = UIKeyboardType.numberPad {
     didSet {

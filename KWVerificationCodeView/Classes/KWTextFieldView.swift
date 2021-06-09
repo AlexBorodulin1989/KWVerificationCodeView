@@ -72,7 +72,8 @@ protocol KWTextFieldDelegate: class {
   // MARK: - IBOutlets
   @IBOutlet weak var numberTextField: KWTextField!
   @IBOutlet weak private var underlineView: UIView!
-
+    @IBOutlet weak var underlineHeight: NSLayoutConstraint!
+    
   // MARK: - Variables
   private var keyboardAppearance = UIKeyboardAppearance.default
   weak var delegate: KWTextFieldDelegate?
