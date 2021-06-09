@@ -61,9 +61,7 @@ public protocol KWVerificationCodeViewDelegate: class {
 
   @IBInspectable public var textSize: CGFloat = 24.0 {
     didSet {
-      for textFieldView in textFieldViews {
-        textFieldView.numberTextField.font = UIFont.systemFont(ofSize: textSize)
-      }
+        setupTextFieldViews()
     }
   }
 
@@ -108,9 +106,7 @@ public protocol KWVerificationCodeViewDelegate: class {
     
     @IBInspectable public var underlineHeight: CGFloat = 1 {
       didSet {
-        for textFieldView in textFieldViews {
-            textFieldView.underlineHeight.constant = underlineHeight
-        }
+        setupTextFieldViews()
       }
     }
 
@@ -234,6 +230,8 @@ public protocol KWVerificationCodeViewDelegate: class {
       textFieldView.delegate = self
       textFieldViews.append(textFieldView)
       currentX += (textFieldViewWidth + textFieldViewLeadingSpace)
+        textFieldView.underlineHeight.constant = underlineHeight
+        textFieldView.numberTextField.font = UIFont.systemFont(ofSize: textSize)
     }
 
     textFieldViews[0].numberTextField.text = ""
